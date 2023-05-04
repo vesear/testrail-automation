@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "wdio": "wdio run ./wdio.conf.js"
@@ -23,6 +24,10 @@
     "@wdio/mocha-framework": "^8.8.7",
     "@wdio/spec-reporter": "^8.8.7",
     "chromedriver": "^112.0.1",
+    "prettier": "2.8.8",
     "wdio-chromedriver-service": "^8.1.1"
+  },
+  "dependencies": {
+    "chai": "^4.3.7"
   }
 }
