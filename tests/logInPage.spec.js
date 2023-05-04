@@ -6,11 +6,10 @@ describe("Log in to TestRail", async () => {
   it("User should log in with walid credentials ", async () => {
     expect(await logInPage.openLogInPage()).to.be.true;
 
-    await logInPage.logIn(CONFIG.ADMIN.USERNAME, CONFIG.ADMIN.PASSWORD);
+    const { ADMIN } = CONFIG;
+    await logInPage.logIn(ADMIN.USERNAME, ADMIN.PASSWORD);
     const openedPage = await logInPage.getUserName();
 
-    expect(openedPage).to.be.eql(
-      CONFIG.ADMIN.NAME + " " + CONFIG.ADMIN.SURNAME
-    );
+    expect(openedPage).to.be.eql(ADMIN.NAME + " " + ADMIN.SURNAME);
   });
 });
