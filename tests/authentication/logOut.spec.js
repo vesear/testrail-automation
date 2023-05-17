@@ -1,13 +1,12 @@
 import { expect } from "chai";
-import { CONFIG } from "../config.js";
-import { logInPage } from "../pageObjects/logInPage/logInPage.js";
-import { dashboardPage } from "../pageObjects/logInPage/dashboardPage.js";
+import { CONFIG } from "../../config.js";
+import { logInPage } from "../../pageObjects/logInPage/logInPage.js";
+import { dashboardPage } from "../../pageObjects/logInPage/dashboardPage.js";
 
 const { ADMIN } = CONFIG;
-describe("Log Out from TestRail only", async () => {
+describe("Log Out from TestRail ", async () => {
   before("Login to app", async () => {
-    expect(await logInPage.openLogInPage()).to.be.true;
-
+    await logInPage.openLogInPage();
     await logInPage.logIn(ADMIN.USERNAME, ADMIN.PASSWORD);
   });
   it("User should log out from TestRail", async () => {

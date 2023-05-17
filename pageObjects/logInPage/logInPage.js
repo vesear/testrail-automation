@@ -3,13 +3,14 @@ const SELECTORS = {
   NAME_INPUT: "#name",
   PASSWORD_INPUT: "#password",
   LOG_IN_BUTTON: "#button_primary",
-  USERNAME_BUTTON: "//span[@class='navigation-username']", //Prasti patom peremeschy na dashboard page selektars
+  USERNAME_BUTTON: "//span[@class='navigation-username']",
 };
 
 const openLogInPage = async () => {
   await browser.url("");
-  return $(SELECTORS.LOG_IN_FORM).isDisplayed();
 };
+
+const isPageOpened = () => $(SELECTORS.LOG_IN_FORM).isDisplayed();
 
 const logIn = async (name, password) => {
   await $(SELECTORS.NAME_INPUT).setValue(name);
@@ -25,4 +26,5 @@ export const logInPage = {
   openLogInPage,
   logIn,
   getUserName,
+  isPageOpened,
 };
