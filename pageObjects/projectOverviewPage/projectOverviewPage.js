@@ -4,10 +4,16 @@ const SELECTORS = {
 };
 
 const getProjectName = async () =>
-  await $(SELECTORS.PROJECT_NAME_TITLE).getText();
+    await $(SELECTORS.PROJECT_NAME_TITLE).getText();
 
-const getAnnouncementTitle = async () =>
-  await $(SELECTORS.PROJECT_ANNOUNCEMENT_TITLE).getText();
+const getAnnouncementTitle = async () => {
+  const titleElement = await $(SELECTORS.PROJECT_ANNOUNCEMENT_TITLE)
+  if (await titleElement.isDisplayed()) {
+    return titleElement.getText()
+  }
+  return "";
+
+}
 
 export const projectOverviewPage = {
   getProjectName,

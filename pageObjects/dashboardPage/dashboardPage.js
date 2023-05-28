@@ -4,9 +4,6 @@ const SELECTORS = {
   USERNAME_BTN: "#navigation-user",
   LOG_OUT_BTN: "#navigation-user-logout",
   ADD_FIRST_PROJECT_BTN: "#navigation-empty-addproject",
-  NAME_INPUT: "#name",
-  ANNOUNCEMENT_INPUT: "#announcement",
-  ADD_PROJECT_BTN_ACCEPT: "#accept",
   CONGRATS_MESSAGE: "//div[@class='empty-title']",
   PROJECTS_LIST_DIV: "#content_container",
   ADD_PROJECT_BTN: "#sidebar-projects-add",
@@ -20,26 +17,18 @@ const logOut = async () => {
   await $(SELECTORS.LOG_OUT_BTN).click();
 };
 
-const createProject = async ({ name, announcement }) => {
-  await $(SELECTORS.NAME_INPUT).setValue(name);
-  await $(SELECTORS.ANNOUNCEMENT_INPUT).setValue(announcement);
-  await $(SELECTORS.ADD_PROJECT_BTN_ACCEPT).click();
-};
-
-const createFirstProject = async (project) => {
+const clickAddFirstProjectButton = async () => {
   await $(SELECTORS.ADD_FIRST_PROJECT_BTN).click();
-  await createProject(project);
 };
 
-const createNotFirstProject = async (project) => {
+const clickAddProjectButton = async () => {
   await $(SELECTORS.ADD_PROJECT_BTN).click();
-  await createProject(project);
 };
 
 export const dashboardPage = {
   logOut,
-  createFirstProject,
-  createNotFirstProject,
   projectsSummary,
   getCongratulationsMessage,
+  clickAddFirstProjectButton,
+  clickAddProjectButton,
 };
