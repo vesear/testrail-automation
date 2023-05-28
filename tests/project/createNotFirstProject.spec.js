@@ -1,18 +1,62 @@
 import { CONFIG } from "../../config.js";
 import { logInPage } from "../../pageObjects/logInPage/logInPage.js";
 import { dashboardPage } from "../../pageObjects/dashboardPage/dashboardPage.js";
+import { createProjectPage } from "../../pageObjects/createProjectPage/createProjectPage.js";
+import { projectOverviewPage } from "../../pageObjects/projectOverviewPage/projectOverviewPage.js";
+import { expect } from "chai";
+import deleteAllProject from "../../administration/services/deleteAllProject.js";
 
 const { ADMIN } = CONFIG;
 
-describe("Create not first project ", async () => {
+const generateUniqueName = () => new Date().toISOString();
+
+describe("Create not first project only ", async () => {
   before("Login to app", async () => {
     await logInPage.openLogInPage();
     await logInPage.logIn(ADMIN.USERNAME, ADMIN.PASSWORD);
+    await deleteAllProject();
   });
-  it("User should create project(not first project) ", async () => {
-    await dashboardPage.createNotFirstProject({
-      name: "Artyom",
-      announcement: "Veselko",
+
+  beforeEach(async () => {
+    await browser.url("index.php?/dashboard");
+  });
+
+  const projects = [
+    {
+      announcement: "You will see me",
+      showAnnouncement: true,
+    },
+    {
+      announcement: "SDFCVNBMN",
+      showAnnouncement: false,
+    },
+  ];
+
+  projects.forEach(({ announcement, showAnnouncement }) => {
+    it("User should create project (not first project) ", async () => {
+      const expectedName = generateUniqueName();
+      await dashboardPage.clickAddProjectButton();
+      await createProjectPage.createNotFirstProject({
+        name: expectedName,
+        announcement,
+        showAnnouncement,
+      });
+      await browser.url("index.php?/dashboard");
+      await dashboardPage.projectsSummary.openProject(expectedName);
+      await validateProject(expectedName, announcement, showAnnouncement);
     });
   });
 });
+
+const validateProject = async (name, announcement, showAnnouncement) => {
+  const actualProjectName = await projectOverviewPage.getProjectName();
+
+  expect(actualProjectName).to.be.eql(name);
+
+  const actualAnnouncement = await projectOverviewPage.getAnnouncementTitle();
+  if (showAnnouncement) {
+    expect(actualAnnouncement).to.be.eql(announcement);
+  } else {
+    expect(actualAnnouncement).to.be.eql("");
+  }
+};

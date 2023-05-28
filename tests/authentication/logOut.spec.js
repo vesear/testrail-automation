@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { CONFIG } from "../../config.js";
 import { logInPage } from "../../pageObjects/logInPage/logInPage.js";
-import { dashboardPage } from "../../pageObjects/logInPage/dashboardPage.js";
+import { dashboardPage } from "../../pageObjects/dashboardPage/dashboardPage.js";
 
 const { ADMIN } = CONFIG;
 describe("Log Out from TestRail ", async () => {
