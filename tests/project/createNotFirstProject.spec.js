@@ -36,7 +36,7 @@ describe("Create not first project  ", async () => {
     it("User should create project (not first project) ", async () => {
       const expectedName = generateUniqueName();
       await dashboardPage.clickAddProjectButton();
-      await createProjectPage.createNotFirstProject({
+      await createProjectPage.createProject({
         name: expectedName,
         announcement,
         showAnnouncement,
