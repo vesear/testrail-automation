@@ -62,7 +62,7 @@ export const config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: "info",
+  logLevel: "error",
   //
   // Set specific log levels per logger
   // loggers:
@@ -86,7 +86,7 @@ export const config = {
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: "https://artyomveselko1.testrail.io/index.php?/auth/login",
+  baseUrl: "https://avesear.testrail.io//index.php?/auth/login",
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 50000,
@@ -132,7 +132,6 @@ export const config = {
   mochaOpts: {
     ui: "bdd",
     timeout: 60000,
-    grep: "only",
   },
   //
   // =====
