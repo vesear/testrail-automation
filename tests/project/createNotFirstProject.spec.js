@@ -1,16 +1,16 @@
 import { CONFIG } from "../../config.js";
-import { logInPage } from "../../pageObjects/logInPage/logInPage.js";
-import { dashboardPage } from "../../pageObjects/dashboardPage/dashboardPage.js";
-import { createProjectPage } from "../../pageObjects/createProjectPage/createProjectPage.js";
-import { projectOverviewPage } from "../../pageObjects/projectOverviewPage/projectOverviewPage.js";
+import { logInPage } from "../../pageObjects/auth/logInPage.js";
+import { dashboardPage } from "../../pageObjects/dashboard/dashboardPage.js";
 import { expect } from "chai";
 import deleteAllProject from "../../administration/services/deleteAllProject.js";
+import { createProjectPage } from "../../pageObjects/admin/projects/addPage.js";
+import { projectOverviewPage } from "../../pageObjects/projects/overview/projectsOveerviewPage.js";
 
 const { ADMIN } = CONFIG;
 
 const generateUniqueName = () => new Date().toISOString();
 
-describe("Create not first project only ", async () => {
+describe("Create not first project  ", async () => {
   before("Login to app", async () => {
     await logInPage.openLogInPage();
     await logInPage.logIn(ADMIN.USERNAME, ADMIN.PASSWORD);

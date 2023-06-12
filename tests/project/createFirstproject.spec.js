@@ -1,25 +1,29 @@
 import { CONFIG } from "../../config.js";
-import { logInPage } from "../../pageObjects/logInPage/logInPage.js";
-import { dashboardPage } from "../../pageObjects/dashboardPage/dashboardPage.js";
-import { FIRST_PROJECT_CONGRATS_MESSAGE } from "../../pageObjects/dashboardPage/dashboardPageConstants.js";
+import { logInPage } from "../../pageObjects/auth/logInPage.js";
+import { dashboardPage } from "../../pageObjects/dashboard/dashboardPage.js";
 import { expect } from "chai";
-import { projectOverviewPage } from "../../pageObjects/projectOverviewPage/projectOverviewPage.js";
-import { projectsSummary } from "../../pageObjects/dashboardPage/components/projectsSummary.js";
-import { createProjectPage } from "../../pageObjects/createProjectPage/createProjectPage.js";
+import { createProjectPage } from "../../pageObjects/admin/projects/addPage.js";
+import { projectOverviewPage } from "../../pageObjects/projects/overview/projectsOveerviewPage.js";
+import { projectsSummary } from "../../pageObjects/dashboard/components/projectsSummary.js";
+import deleteAllProject from "../../administration/services/deleteAllProject.js";
+import { FIRST_PROJECT_CONGRATS_MESSAGE } from "../../pageObjects/dashboard/dashboardPageConstants.js";
 
 const { ADMIN } = CONFIG;
+
+const project = {
+  name: "MARIA",
+  announcement: "PAPUGA",
+  showAnnouncement: false,
+};
 
 describe("Create first project  ", async () => {
   before("Login to app", async () => {
     await logInPage.openLogInPage();
     await logInPage.logIn(ADMIN.USERNAME, ADMIN.PASSWORD);
+    await deleteAllProject();
+    await dashboardPage.open();
   });
   it("User should create first project", async () => {
-    const project = {
-      name: "MARIA",
-      announcement: "PAPUGA",
-      showAnnouncement: true,
-    };
     await dashboardPage.clickAddFirstProjectButton();
     await createProjectPage.createFirstProject(project);
     const congratulationMessage =

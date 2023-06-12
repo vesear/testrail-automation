@@ -10,6 +10,8 @@ const SELECTORS = {
   ADDED_PROJECT_MESSAGE: "//div[@class='message message-success']",
 };
 
+const open = async () => await browser.url("index.php?/dashboard");
+
 const getCongratulationsMessage = () => $(SELECTORS.CONGRATS_MESSAGE).getText();
 
 const logOut = async () => {
@@ -31,4 +33,5 @@ export const dashboardPage = {
   getCongratulationsMessage,
   clickAddFirstProjectButton,
   clickAddProjectButton,
+  open,
 };
