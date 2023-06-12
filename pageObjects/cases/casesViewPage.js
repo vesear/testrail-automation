@@ -6,10 +6,7 @@ const SELECTORS = {
 const getDisplayedValue = async (label) => {
   const elementSelector = `//label[normalize-space(text())="${label}"]/..`;
   const value = await $(elementSelector).getText();
-  console.log(typeof value);
-  const replacedValue = value.toString().replace("\n", "").replace(label, "");
-
-  return replacedValue;
+  return value.toString().replace("\n", "").replace(label, "");
 };
 
 const getTestCaseName = async () => {
@@ -17,7 +14,8 @@ const getTestCaseName = async () => {
 };
 
 const congratsMessage = async () => {
-  await $(SELECTORS.SUCCESS_ADDED_MESSAGE_DIV).getText();
+  return await $(SELECTORS.SUCCESS_ADDED_MESSAGE_DIV).getText();
+
 };
 
 export const casesViewPage = {

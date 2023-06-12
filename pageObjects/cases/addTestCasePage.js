@@ -2,11 +2,7 @@ import dropDown from "../../elements/dropDown.js";
 import input from "../../elements/input.js";
 
 const SELECTORS = {
-  TITLE_INPUT: "#title",
   REFERENCE_INPUT: '//label[@for="refs"]//following-sibling::input',
-  PRECONDITIONS: "#custom_preconds",
-  STEPS: "#custom_steps",
-  EXPECTED_RESULT: "#custom_expected",
   TYPE: {
     SELECT_MENU_ICON: "//div[@id='type_id_chzn']//b",
   },
@@ -24,8 +20,7 @@ export const createTestCase = async (testCase) => {
     automationType,
   } = testCase;
 
-  await $(SELECTORS.TITLE_INPUT).setValue(title);
-
+  await input("Title", title);
   await dropDown("Template").selectValue(template);
   await dropDown("Type").selectValue(type);
   await dropDown("Priority").selectValue(priority);

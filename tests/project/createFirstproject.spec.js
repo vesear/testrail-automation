@@ -10,19 +10,20 @@ import { FIRST_PROJECT_CONGRATS_MESSAGE } from "../../pageObjects/dashboard/dash
 
 const { ADMIN } = CONFIG;
 
+const project = {
+  name: "MARIA",
+  announcement: "PAPUGA",
+  showAnnouncement: false,
+};
+
 describe("Create first project  ", async () => {
   before("Login to app", async () => {
     await logInPage.openLogInPage();
     await logInPage.logIn(ADMIN.USERNAME, ADMIN.PASSWORD);
     await deleteAllProject();
-    await browser.url("https://avesear.testrail.io/index.php?/dashboard");
+    await dashboardPage.open();
   });
   it("User should create first project", async () => {
-    const project = {
-      name: "MARIA",
-      announcement: "PAPUGA",
-      showAnnouncement: false,
-    };
     await dashboardPage.clickAddFirstProjectButton();
     await createProjectPage.createFirstProject(project);
     const congratulationMessage =

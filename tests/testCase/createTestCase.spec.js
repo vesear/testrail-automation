@@ -27,12 +27,12 @@ const testCase = {
   automationType: " Ranorex",
 };
 
-describe("Create test case in created project  ", async () => {
+describe("Create test case in created project   ", async () => {
   before("Login to app", async () => {
     await logInPage.openLogInPage();
     await logInPage.logIn(ADMIN.USERNAME, ADMIN.PASSWORD);
     await deleteAllProject();
-    await browser.url("index.php?/dashboard");
+    await dashboardPage.open();
     await dashboardPage.clickAddProjectButton();
     await createProjectPage.createNotFirstProject({
       name: project.name,
@@ -42,12 +42,16 @@ describe("Create test case in created project  ", async () => {
   });
 
   it("User should create testcase ", async () => {
-    await browser.url("index.php?/dashboard");
+    await dashboardPage.open();
     await dashboardPage.projectsSummary.openProject(project.name);
     await projectOverviewPage.openTestCasesTab();
     await viewPage.addTestCaseButtonClick();
     await createTestCase(testCase);
-    await casesViewPage.congratsMessage().isVisible;
+    const successfullyAddedTestCaseMessage =
+      "Successfully added the new test case. Add another";
+    expect(await casesViewPage.congratsMessage()).to.be.eql(
+      successfullyAddedTestCaseMessage
+    );
 
     const type = await casesViewPage.getDisplayedValue("Type");
     expect(type).to.eql(testCase.type);
