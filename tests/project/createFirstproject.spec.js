@@ -25,7 +25,7 @@ describe("Create first project  ", async () => {
   });
   it("User should create first project", async () => {
     await dashboardPage.clickAddFirstProjectButton();
-    await createProjectPage.createFirstProject(project);
+    await createProjectPage.createProject(project);
     const congratulationMessage =
       await dashboardPage.getCongratulationsMessage();
     if (project.showAnnouncement) {

@@ -34,7 +34,7 @@ describe("Create test case in created project   ", async () => {
     await deleteAllProject();
     await dashboardPage.open();
     await dashboardPage.clickAddProjectButton();
-    await createProjectPage.createNotFirstProject({
+    await createProjectPage.createProject({
       name: project.name,
       announcement: project.announcement,
       showAnnouncement: project.showAnnouncement,

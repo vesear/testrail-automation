@@ -1,3 +1,5 @@
+import input from "../../../elements/input.js";
+
 const SELECTORS = {
   NAME_INPUT: "#name",
   ANNOUNCEMENT_INPUT: "#announcement",
@@ -5,8 +7,8 @@ const SELECTORS = {
   ADD_PROJECT_BTN_ACCEPT: "#accept",
 };
 
-const createProject = async ({ name, announcement, showAnnouncement }) => {
-  await $(SELECTORS.NAME_INPUT).setValue(name);
+const create = async ({ name, announcement, showAnnouncement }) => {
+  await input("Name", name);
   await $(SELECTORS.ANNOUNCEMENT_INPUT).setValue(announcement);
   if (showAnnouncement) {
     await $(SELECTORS.SHOW_ANNOUNCEMENT_CHECKBOX).click();
@@ -14,15 +16,10 @@ const createProject = async ({ name, announcement, showAnnouncement }) => {
   await $(SELECTORS.ADD_PROJECT_BTN_ACCEPT).click();
 };
 
-const createFirstProject = async (project) => {
-  await createProject(project);
-};
-
-const createNotFirstProject = async (project) => {
-  await createProject(project);
+const createProject = async (project) => {
+  await create(project);
 };
 
 export const createProjectPage = {
-  createFirstProject,
-  createNotFirstProject,
+  createProject,
 };
