@@ -27,7 +27,7 @@ const testCase = {
   automationType: " Ranorex",
 };
 
-describe("Create test case in created project   ", async () => {
+describe("Create test case in created project", async () => {
   before("Login to app", async () => {
     await logInPage.openLogInPage();
     await logInPage.logIn(ADMIN.USERNAME, ADMIN.PASSWORD);
