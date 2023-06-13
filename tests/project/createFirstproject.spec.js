@@ -16,7 +16,7 @@ const project = {
   showAnnouncement: false,
 };
 
-describe("Create first project  ", async () => {
+describe("Create first project", async () => {
   before("Login to app", async () => {
     await logInPage.openLogInPage();
     await logInPage.logIn(ADMIN.USERNAME, ADMIN.PASSWORD);
