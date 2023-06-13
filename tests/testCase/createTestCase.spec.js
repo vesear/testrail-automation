@@ -1,6 +1,5 @@
 import { logInPage } from "../../pageObjects/auth/logInPage.js";
 import deleteAllProject from "../../administration/services/deleteAllProject.js";
-import { CONFIG } from "../../config.js";
 import { dashboardPage } from "../../pageObjects/dashboard/dashboardPage.js";
 import { createProjectPage } from "../../pageObjects/admin/projects/addPage.js";
 import { projectOverviewPage } from "../../pageObjects/projects/overview/projectsOveerviewPage.js";
@@ -8,8 +7,8 @@ import { viewPage } from "../../pageObjects/suites/viewPage.js";
 import { createTestCase } from "../../pageObjects/cases/addTestCasePage.js";
 import { casesViewPage } from "../../pageObjects/cases/casesViewPage.js";
 import { expect } from "chai";
+import { CONFIG } from "../../config.js";
 
-const { ADMIN } = CONFIG;
 const generateUniqueName = () => new Date().toISOString();
 const project = {
   name: generateUniqueName(),
@@ -30,7 +29,7 @@ const testCase = {
 describe("Create test case in created project", async () => {
   before("Login to app", async () => {
     await logInPage.openLogInPage();
-    await logInPage.logIn(ADMIN.USERNAME, ADMIN.PASSWORD);
+    await logInPage.logIn(CONFIG.USERNAME, CONFIG.PASSWORD);
     await deleteAllProject();
     await dashboardPage.open();
     await dashboardPage.clickAddProjectButton();
