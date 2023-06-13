@@ -1,13 +1,12 @@
 import { expect } from "chai";
-import { CONFIG } from "../../config.js";
 import { logInPage } from "../../pageObjects/auth/logInPage.js";
 import { dashboardPage } from "../../pageObjects/dashboard/dashboardPage.js";
+import { CONFIG } from "../../config.js";
 
-const { ADMIN } = CONFIG;
 describe("Log Out from TestRail", async () => {
   before("Login to app", async () => {
     await logInPage.openLogInPage();
-    await logInPage.logIn(ADMIN.USERNAME, ADMIN.PASSWORD);
+    await logInPage.logIn(CONFIG.USER.USERNAME, CONFIG.USER.PASSWORD);
   });
   it("User should log out from TestRail", async () => {
     await dashboardPage.logOut();

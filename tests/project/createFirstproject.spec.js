@@ -1,4 +1,3 @@
-import { CONFIG } from "../../config.js";
 import { logInPage } from "../../pageObjects/auth/logInPage.js";
 import { dashboardPage } from "../../pageObjects/dashboard/dashboardPage.js";
 import { expect } from "chai";
@@ -7,8 +6,7 @@ import { projectOverviewPage } from "../../pageObjects/projects/overview/project
 import { projectsSummary } from "../../pageObjects/dashboard/components/projectsSummary.js";
 import deleteAllProject from "../../administration/services/deleteAllProject.js";
 import { FIRST_PROJECT_CONGRATS_MESSAGE } from "../../pageObjects/dashboard/dashboardPageConstants.js";
-
-const { ADMIN } = CONFIG;
+import { CONFIG } from "../../config.js";
 
 const project = {
   name: "MARIA",
@@ -19,7 +17,7 @@ const project = {
 describe("Create first project", async () => {
   before("Login to app", async () => {
     await logInPage.openLogInPage();
-    await logInPage.logIn(ADMIN.USERNAME, ADMIN.PASSWORD);
+    await logInPage.logIn(CONFIG.USER.USERNAME, CONFIG.USER.PASSWORD);
     await deleteAllProject();
     await dashboardPage.open();
   });

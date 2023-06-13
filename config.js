@@ -1,8 +1,10 @@
+import "dotenv/config";
+
 export const CONFIG = {
-  ADMIN: {
-    NAME: "Artyom",
-    SURNAME: "Veselko",
-    USERNAME: "veselkoartyom@gmail.com",
-    PASSWORD: "Alexis-1937",
+  USER: {
+    USERNAME: process.env.USER_NAME,
+    PASSWORD: process.env.PASSWORD,
+    NAME: process.env.NAME,
+    SURNAME: process.env.SURNAME,
   },
 };
