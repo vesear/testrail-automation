@@ -33,13 +33,9 @@ export const config = {
   connectionRetryCount: 3,
 
   afterTest: async function (test) {
-    console.log("AFTER TEST");
-    console.log({ test });
     const screenshot = await browser.takeScreenshot();
-    console.log("SCREENSHOT HERE", screenshot);
     if (test.error !== undefined) {
       const screenshot = await browser.takeScreenshot();
-      console.log("SCREENSHOT HERE", screenshot);
     }
   },
 
