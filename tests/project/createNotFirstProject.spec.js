@@ -11,7 +11,7 @@ const generateUniqueName = () => new Date().toISOString();
 describe("Create not first project", async () => {
   before("Login to app", async () => {
     await logInPage.openLogInPage();
-    await logInPage.logIn(CONFIG.USERNAME, CONFIG.PASSWORD);
+    await logInPage.logIn(CONFIG.USER.USERNAME, CONFIG.USER.PASSWORD);
     await deleteAllProject();
   });
 

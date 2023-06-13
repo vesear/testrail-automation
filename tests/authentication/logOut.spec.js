@@ -6,7 +6,7 @@ import { CONFIG } from "../../config.js";
 describe("Log Out from TestRail", async () => {
   before("Login to app", async () => {
     await logInPage.openLogInPage();
-    await logInPage.logIn(CONFIG.USERNAME, CONFIG.PASSWORD);
+    await logInPage.logIn(CONFIG.USER.USERNAME, CONFIG.USER.PASSWORD);
   });
   it("User should log out from TestRail", async () => {
     await dashboardPage.logOut();
