@@ -1,5 +1,4 @@
 import { logInPage } from "../../pageObjects/auth/logInPage.js";
-import deleteAllProject from "../../administration/services/deleteAllProject.js";
 import { dashboardPage } from "../../pageObjects/dashboard/dashboardPage.js";
 import { projectOverviewPage } from "../../pageObjects/projects/overview/projectsOveerviewPage.js";
 import { viewPage } from "../../pageObjects/suites/viewPage.js";
@@ -9,11 +8,6 @@ import { expect } from "chai";
 import { CONFIG } from "../../config.js";
 import { projectServices } from "../../services/api/projectServices.js";
 import { generateProjectData } from "../../utils/generateProjectData.js";
-
-const auth = {
-  username: CONFIG.USER.USERNAME,
-  password: CONFIG.USER.PASSWORD,
-};
 
 const project = {
   name: generateProjectData(),
@@ -36,8 +30,8 @@ describe("Create test case in created project", async () => {
   before("Login to app", async () => {
     await logInPage.openLogInPage();
     await logInPage.logIn(CONFIG.USER.USERNAME, CONFIG.USER.PASSWORD);
-    await deleteAllProject();
-    await projectServices.addProject(project, auth);
+    await projectServices.deleteAllProjects();
+    await projectServices.addProject(project);
   });
   it("User should create testcase ", async () => {
     await dashboardPage.open();
