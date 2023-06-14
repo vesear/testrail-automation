@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "allure-commandline": "^2.22.1",
+    "axios": "^1.4.0",
     "chai": "^4.3.7",
     "dotenv": "^16.1.4",
     "mocha-allure-reporter": "^1.4.0"
