@@ -1,5 +1,4 @@
 import { logInPage } from "../../pageObjects/auth/logInPage.js";
-import deleteAllProject from "../../administration/services/deleteAllProject.js";
 import { dashboardPage } from "../../pageObjects/dashboard/dashboardPage.js";
 import { projectOverviewPage } from "../../pageObjects/projects/overview/projectsOveerviewPage.js";
 import { viewPage } from "../../pageObjects/suites/viewPage.js";
@@ -36,7 +35,7 @@ describe("Create test case in created project", async () => {
   before("Login to app", async () => {
     await logInPage.openLogInPage();
     await logInPage.logIn(CONFIG.USER.USERNAME, CONFIG.USER.PASSWORD);
-    await deleteAllProject();
+    await projectServices.deleteAllProjects(auth);
     await projectServices.addProject(project, auth);
   });
   it("User should create testcase ", async () => {
