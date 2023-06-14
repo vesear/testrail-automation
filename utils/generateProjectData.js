@@ -9,6 +9,7 @@ export function generateProjectData() {
     "Вася",
     "Петя",
   ];
+
   const surnames = [
     "Жопская жопа",
     "Важный человек",
@@ -20,10 +21,11 @@ export function generateProjectData() {
     "Ойтишник",
   ];
 
-  const actualName = Math.floor(Math.random() * names.length);
-  const actualSurname = Math.floor(Math.random() * surnames.length);
+  const random = (param) => {
+    return Math.floor(Math.random() * param.length);
+  };
 
+  const actualName = random(names);
+  const actualSurname = random(surnames);
   return names[actualName] + " " + surnames[actualSurname];
 }
-
-const generateUniqueName = () => new Date().toISOString();

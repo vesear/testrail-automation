@@ -5,7 +5,7 @@ const ENDPOINTS = {
 };
 
 const addProject = async (project, auth) => {
-  await axios.post(ENDPOINTS.ADD_PROJECT, project, { auth });
+  return await axios.post(ENDPOINTS.ADD_PROJECT, project, { auth });
 };
 
 export const projectServices = {

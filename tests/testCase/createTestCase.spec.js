@@ -8,7 +8,7 @@ import { casesViewPage } from "../../pageObjects/cases/casesViewPage.js";
 import { expect } from "chai";
 import { CONFIG } from "../../config.js";
 import { projectServices } from "../../services/api/projectServices.js";
-import { generateProjectData } from "../../utils.js";
+import { generateProjectData } from "../../utils/generateProjectData.js";
 
 const auth = {
   username: CONFIG.USER.USERNAME,
@@ -32,7 +32,7 @@ const testCase = {
   automationType: " Ranorex",
 };
 
-describe("Create test case in created project", async () => {
+describe("Create test case in created project only", async () => {
   before("Login to app", async () => {
     await logInPage.openLogInPage();
     await logInPage.logIn(CONFIG.USER.USERNAME, CONFIG.USER.PASSWORD);
