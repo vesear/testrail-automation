@@ -1,19 +1,25 @@
 import { logInPage } from "../../pageObjects/auth/logInPage.js";
 import deleteAllProject from "../../administration/services/deleteAllProject.js";
 import { dashboardPage } from "../../pageObjects/dashboard/dashboardPage.js";
-import { createProjectPage } from "../../pageObjects/admin/projects/addPage.js";
 import { projectOverviewPage } from "../../pageObjects/projects/overview/projectsOveerviewPage.js";
 import { viewPage } from "../../pageObjects/suites/viewPage.js";
 import { createTestCase } from "../../pageObjects/cases/addTestCasePage.js";
 import { casesViewPage } from "../../pageObjects/cases/casesViewPage.js";
 import { expect } from "chai";
 import { CONFIG } from "../../config.js";
+import { projectServices } from "../../services/api/projectServices.js";
+import { generateProjectData } from "../../utils.js";
 
-const generateUniqueName = () => new Date().toISOString();
+const auth = {
+  username: CONFIG.USER.USERNAME,
+  password: CONFIG.USER.PASSWORD,
+};
+
 const project = {
-  name: generateUniqueName(),
-  announcement: "ok",
-  showAnnouncement: true,
+  name: generateProjectData(),
+  announcement: generateProjectData(),
+  show_announcement: true,
+  suite_mode: 1,
 };
 
 const testCase = {
@@ -31,21 +37,15 @@ describe("Create test case in created project", async () => {
     await logInPage.openLogInPage();
     await logInPage.logIn(CONFIG.USER.USERNAME, CONFIG.USER.PASSWORD);
     await deleteAllProject();
-    await dashboardPage.open();
-    await dashboardPage.clickAddProjectButton();
-    await createProjectPage.createProject({
-      name: project.name,
-      announcement: project.announcement,
-      showAnnouncement: project.showAnnouncement,
-    });
+    await projectServices.addProject(project, auth);
   });
-
   it("User should create testcase ", async () => {
     await dashboardPage.open();
     await dashboardPage.projectsSummary.openProject(project.name);
     await projectOverviewPage.openTestCasesTab();
     await viewPage.addTestCaseButtonClick();
     await createTestCase(testCase);
+
     const successfullyAddedTestCaseMessage =
       "Successfully added the new test case. Add another";
     expect(await casesViewPage.congratsMessage()).to.be.eql(
