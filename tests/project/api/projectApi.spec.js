@@ -10,6 +10,9 @@ const apiProject = {
   suite_mode: 1,
 };
 
+const INCORRECT_PROJECT_ID_ERROR_MESSAGE =
+  "Field :project_id is not a valid or accessible project.";
+
 describe("Project API test", async () => {
   it("Get project positive", async () => {
     const addedProject = await projectServices.addProject(apiProject);
@@ -26,11 +29,15 @@ describe("Project API test", async () => {
 
     await projectServices.deleteAllProjects();
   });
-  it("Get project negative", async () => {
+  it("Get project negative only", async () => {
+    let res = null;
     try {
-      const response = await projectServices.getProject(11111);
+      res = await projectServices.getProject(11111);
     } catch (e) {
       expect(e.response.status).to.be.eql(STATUS_CODES.BAD_REQUEST);
+      expect(e.response.data.error).to.be.eql(
+        INCORRECT_PROJECT_ID_ERROR_MESSAGE
+      );
     }
   });
 });
