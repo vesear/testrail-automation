@@ -22,8 +22,7 @@ const deleteAllProjects = async () => {
 };
 
 const getProject = async (id) => {
-  const project = await axiosInstance.get(`${ENDPOINTS.GET_PROJECT}${id}`);
-  console.log(project);
+  return await axiosInstance.get(`${ENDPOINTS.GET_PROJECT}${id}`);
 };
 
 export const projectServices = {

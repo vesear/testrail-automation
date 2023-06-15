@@ -1,0 +1,6 @@
+export const STATUS_CODES = {
+  OK: 200,
+  INVALID_PROJECT: 400,
+  NO_ACCESS: 403,
+  TOO_MANY_REQUESTS: 429,
+};
