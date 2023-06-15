@@ -11,18 +11,16 @@ const apiProject = {
 };
 
 describe("Project API test", async () => {
-  it("Get project positive only", async () => {
+  it("Get project positive", async () => {
     const addedProject = await projectServices.addProject(apiProject);
     const neededProject = await projectServices.getProject(
       addedProject.data.id
     );
 
-    expect(addedProject.data.name).to.be.eql(neededProject.data.name);
-    expect(addedProject.data.announcement).to.be.eql(
-      neededProject.data.announcement
-    );
-    expect(addedProject.data.show_announcement).to.be.eql(
-      neededProject.data.show_announcement
+    expect(neededProject.data.name).to.be.eql(apiProject.name);
+    expect(neededProject.data.announcement).to.be.eql(apiProject.announcement);
+    expect(neededProject.data.show_announcement).to.be.eql(
+      apiProject.show_announcement
     );
     expect(neededProject.status).to.be.eql(STATUS_CODES.OK);
 
@@ -32,7 +30,7 @@ describe("Project API test", async () => {
     try {
       const response = await projectServices.getProject(11111);
     } catch (e) {
-      expect(e.response.status).to.be.eql(STATUS_CODES.INVALID_PROJECT);
+      expect(e.response.status).to.be.eql(STATUS_CODES.BAD_REQUEST);
     }
   });
 });

@@ -44,6 +44,5 @@ export const config = {
   mochaOpts: {
     ui: "bdd",
     timeout: 60000,
-    grep: "only",
   },
 };
