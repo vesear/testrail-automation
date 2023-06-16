@@ -17,23 +17,15 @@ const INCORRECT_PROJECT_ID_ERROR_MESSAGE =
 
 describe("GET get_project", async () => {
   it("Get project positive", async () => {
-    //ARRANGE
     const addedProject = await projectServices.addProject(apiProject);
     const projectId = addedProject.data.id;
-    console.log(addedProject.data);
-
-    // TEST
-
     const response = await projectServices.getProject(projectId);
-
-    // ASSERT
     const statusCode = response.status;
     const data = response.data;
 
     expect(statusCode).to.be.eql(STATUS_CODES.OK);
     expect(data.id).to.be.eql(projectId);
     expect(data.name).to.be.eql(apiProject.name);
-
     expect(data.groups).to.be.empty;
   });
 
@@ -47,7 +39,6 @@ describe("GET get_project", async () => {
       );
     }
   });
-
   afterEach(async () => {
     await projectServices.deleteAllProjects();
   });
