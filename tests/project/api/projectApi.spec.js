@@ -1,7 +1,7 @@
 import { projectServices } from "../../../services/api/projectServices.js";
 import { generateProjectData } from "../../../utils/generateProjectData.js";
 import { expect } from "chai";
-import { STATUS_CODES } from "../../../constants.js";
+import { STATUS_CODES } from "../../../constants/statusCodes.js";
 
 const apiProject = {
   name: generateProjectData(),
@@ -9,6 +9,8 @@ const apiProject = {
   show_announcement: true,
   suite_mode: 1,
 };
+
+const NON_EXISTENT_PROJECT_ID = 11111;
 
 const INCORRECT_PROJECT_ID_ERROR_MESSAGE =
   "Field :project_id is not a valid or accessible project.";
@@ -37,7 +39,7 @@ describe("GET get_project", async () => {
 
   it("Get project negative", async () => {
     try {
-      await projectServices.getProject(11111);
+      await projectServices.getProject(NON_EXISTENT_PROJECT_ID);
     } catch (e) {
       expect(e.response.status).to.be.eql(STATUS_CODES.BAD_REQUEST);
       expect(e.response.data.error).to.be.eql(
