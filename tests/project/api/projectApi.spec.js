@@ -13,31 +13,40 @@ const apiProject = {
 const INCORRECT_PROJECT_ID_ERROR_MESSAGE =
   "Field :project_id is not a valid or accessible project.";
 
-describe("Project API test", async () => {
+describe("GET get_project", async () => {
   it("Get project positive", async () => {
+    //ARRANGE
     const addedProject = await projectServices.addProject(apiProject);
-    const neededProject = await projectServices.getProject(
-      addedProject.data.id
-    );
+    const projectId = addedProject.data.id;
+    console.log(addedProject.data);
 
-    expect(neededProject.data.name).to.be.eql(apiProject.name);
-    expect(neededProject.data.announcement).to.be.eql(apiProject.announcement);
-    expect(neededProject.data.show_announcement).to.be.eql(
-      apiProject.show_announcement
-    );
-    expect(neededProject.status).to.be.eql(STATUS_CODES.OK);
+    // TEST
 
-    await projectServices.deleteAllProjects();
+    const response = await projectServices.getProject(projectId);
+
+    // ASSERT
+    const statusCode = response.status;
+    const data = response.data;
+
+    expect(statusCode).to.be.eql(STATUS_CODES.OK);
+    expect(data.id).to.be.eql(projectId);
+    expect(data.name).to.be.eql(apiProject.name);
+
+    expect(data.groups).to.be.empty;
   });
-  it("Get project negative only", async () => {
-    let res = null;
+
+  it("Get project negative", async () => {
     try {
-      res = await projectServices.getProject(11111);
+      await projectServices.getProject(11111);
     } catch (e) {
       expect(e.response.status).to.be.eql(STATUS_CODES.BAD_REQUEST);
       expect(e.response.data.error).to.be.eql(
         INCORRECT_PROJECT_ID_ERROR_MESSAGE
       );
     }
+  });
+
+  afterEach(async () => {
+    await projectServices.deleteAllProjects();
   });
 });
