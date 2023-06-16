@@ -4,6 +4,8 @@ const ENDPOINTS = {
   ADD_PROJECT: "index.php?/api/v2/add_project",
   GET_PROJECTS: "index.php?/api/v2/get_projects",
   DELETE_PROJECT: "index.php?/api/v2/delete_project/",
+  GET_PROJECT: "index.php?/api/v2/get_project/",
+  UPDATE_PROJECT: "index.php?/api/v2/update_project/",
 };
 
 const addProject = async (project) => {
@@ -19,7 +21,12 @@ const deleteAllProjects = async () => {
   await Promise.all(deleteRequests);
 };
 
+const getProject = async (id) => {
+  return await axiosInstance.get(`${ENDPOINTS.GET_PROJECT}${id}`);
+};
+
 export const projectServices = {
   addProject,
   deleteAllProjects,
+  getProject,
 };
